@@ -1,6 +1,8 @@
-import { FaCheck } from "react-icons/fa";
-import { ImCross } from "react-icons/im";
 import { useState } from "react";
+import { Logo } from "./Logo";
+import { Form } from "./Form";
+import { PackingList } from "./PackingList";
+import { Stats } from "./Stats";
 
 const itemArr = [
   { id: crypto.randomUUID(), text: "item1", count: 0, checked: false },
@@ -27,111 +29,16 @@ export default function App() {
     setItems(list);
   }
 
+  function handleSort() {
+    //TODO add sorting by description, checked status, insert order
+  }
+
   return (
     <div className="container">
       <Logo />
       <Form onAdd={handleAddItem} />
-      <PackingList items={items} onChange={handleChange} />
+      <PackingList items={items} onChange={handleChange} onSort={handleSort} />
       <Stats total={total} packed={packed} />
-    </div>
-  );
-}
-
-function Logo() {
-  return <div className="logo">Far Away</div>;
-}
-
-function Form({ onAdd }) {
-  const [data, setData] = useState({ text: "", count: 1, checked: false });
-  let optionItems = Array(20)
-    .fill(0)
-    .map((x, index) => index + 1);
-
-  return (
-    <div className="form">
-      <p>What do you need for the trip?</p>
-      <select
-        name="items"
-        onChange={(e) => {
-          setData({ ...data, count: Number(e.target.value) });
-        }}
-      >
-        {optionItems.map((x) => {
-          return (
-            <option key={x} value={x}>
-              {x}
-            </option>
-          );
-        })}
-      </select>
-      <input
-        type="text"
-        value={data.text}
-        onChange={(e) => {
-          setData({ ...data, text: e.target.value });
-        }}
-        placeholder="item name"
-      />
-      <button onClick={() => onAdd(data)}>Add</button>
-    </div>
-  );
-}
-
-function PackingList({ items, onChange }) {
-  return (
-    <div className="packing-list">
-      <ItemList items={items} onChange={onChange} />
-      <ListFunctions />
-    </div>
-  );
-}
-
-function ListFunctions() {
-  return (
-    <div className="list-functions">
-      <select name="functions">
-        <option value="description"> Sort by description</option>
-        <option value="input-order"> Sort by input order</option>
-        <option value="packed-status">Sort by packed status </option>
-      </select>
-      <button>Clear List</button>
-    </div>
-  );
-}
-
-function ItemList({ items, onChange }) {
-  let list = items.map((x) => (
-    <Item key={x.text} onChange={onChange} item={x} />
-  ));
-  return <div className="items">{list}</div>;
-}
-
-function Item({ item, onChange }) {
-  return (
-    <div className="item">
-      <input
-        type="checkbox"
-        checked={item.checked}
-        onChange={(e) => {
-          onChange({ ...item, checked: e.target.checked });
-        }}
-      />
-      <p>{` ${item.count} ${item.text}`}</p>
-      {item.checked ? (
-        <FaCheck className="check" />
-      ) : (
-        <ImCross className="cross" />
-      )}
-    </div>
-  );
-}
-
-function Stats({ total, packed }) {
-  return (
-    <div className="stats">
-      <p>
-        You have {total} items in your list, you already packed {packed}
-      </p>
     </div>
   );
 }
