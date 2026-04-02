@@ -1,7 +1,7 @@
 :root {
   --primary: #4f46e5; /* modern indigo */
   --primary-light: #6366f1;
-  --bg: #f8fafc; /* soft background */
+  --bg: #a8f1bb; /* soft background */
   --card: #ffffff;
   --text: #1e293b;
   --muted: #64748b;
@@ -24,6 +24,7 @@ body {
   grid-template-rows: auto 0.25fr auto auto;
   gap: 1.5rem;
   padding: 1.5rem;
+  background-color: rgb(184, 237, 184);
 }
 .logo {
   display: flex;
