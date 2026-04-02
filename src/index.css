@@ -1,13 +1,126 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --primary: #4f46e5; /* modern indigo */
+  --primary-light: #6366f1;
+  --bg: #f8fafc; /* soft background */
+  --card: #ffffff;
+  --text: #1e293b;
+  --muted: #64748b;
+  --success: #22c55e;
+  --danger: #ef4444;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html,
+body {
+  background: var(--bg);
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  color: var(--text);
+}
+.container {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+.logo {
+  background: var(--primary);
+  color: white;
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+.form {
+  background: var(--card);
+  padding: 1rem;
+  border-radius: 12px;
+  display: grid;
+  grid-template-columns: 3fr 1fr 2fr auto;
+  gap: 0.5rem;
+  width: 60%;
+  justify-self: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+input,
+select {
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  outline: none;
+}
+
+button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: var(--primary-light);
+}
+
+.items {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.item {
+  background: var(--card);
+  padding: 0.7rem;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition: 0.2s;
+}
+
+.item:hover {
+  transform: translateY(-2px);
+}
+
+.packing-list {
+  display: grid;
+  grid-template-rows: auto auto;
+}
+
+.list-functions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+}
+
+.list-functions select {
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+.stats {
+  background: var(--card);
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+.check {
+  color: var(--success);
+}
+
+.cross {
+  color: var(--danger);
+  cursor: pointer;
 }
