@@ -17,9 +17,6 @@ export default function App() {
   const total = items.length;
   const packed = items.filter((x) => x.checked).length;
 
-  const sortByKey =
-    sort === "description" ? "text" : sort === "input-order" ? "id" : "checked";
-
   let sortedList = [...items]; // clone to avoid mutating state directly
 
   if (sort === "description") {
