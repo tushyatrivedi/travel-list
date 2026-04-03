@@ -1,7 +1,7 @@
 import { FaCheck } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
 
-export function Item({ item, onChange }) {
+export function Item({ item, onChange, onDelete }) {
   return (
     <div className="item">
       <input
@@ -15,7 +15,9 @@ export function Item({ item, onChange }) {
       {item.checked ? (
         <FaCheck className="check" />
       ) : (
-        <ImCross className="cross" />
+        <div className="delete" onClick={() => onDelete(item.id)}>
+          <ImCross className="cross" />
+        </div>
       )}
     </div>
   );

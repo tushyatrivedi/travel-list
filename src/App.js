@@ -47,6 +47,11 @@ export default function App() {
     setItems(list);
   }
 
+  function handleDelete(id) {
+    let list = items.filter((x) => x.id !== id);
+    setItems(list);
+  }
+
   function handleSort(sortBy) {
     //TODO add sorting by description, checked status, insert order
     setSort(sortBy);
@@ -66,6 +71,7 @@ export default function App() {
         onSort={handleSort}
         sortBy={sort}
         onClear={handleClear}
+        onDelete={handleDelete}
       />
       <Stats total={total} packed={packed} />
     </div>
