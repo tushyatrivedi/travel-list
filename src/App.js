@@ -39,7 +39,7 @@ export default function App() {
       // ascending: unchecked first, checked last
       list.sort((a, b) => Number(a.checked) - Number(b.checked));
     }
-    return [...items];
+    return list;
   }, [items, sort]);
 
   function handleAddItem(item) {
