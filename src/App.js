@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Logo } from "./Logo";
 import { Form } from "./Form";
 import { PackingList } from "./PackingList";
@@ -12,23 +12,35 @@ const itemArr = [
   { id: new Date().getTime() + 3, text: "item4", count: 0, checked: true },
 ];
 export default function App() {
-  const [items, setItems] = useState(itemArr);
+  const [items, setItems] = useState(() => {
+    const stored = localStorage.getItem("itemList");
+    return stored ? JSON.parse(stored) : itemArr;
+  });
+
   const [sort, setSort] = useState("");
+
+  useEffect(() => {
+    console.log(`useEffect called to synchronize localStorage`);
+    localStorage.setItem("itemList", JSON.stringify(items));
+  }, [items]);
+
   const total = items.length;
   const packed = items.filter((x) => x.checked).length;
 
-  let sortedList = [...items]; // clone to avoid mutating state directly
-
-  if (sort === "description") {
-    // ascending alphabetical
-    sortedList.sort((a, b) => a.text.localeCompare(b.text));
-  } else if (sort === "input-order") {
-    // descending by id (newest first)
-    sortedList.sort((a, b) => b.id - a.id);
-  } else if (sort === "packed-status") {
-    // ascending: unchecked first, checked last
-    sortedList.sort((a, b) => Number(a.checked) - Number(b.checked));
-  }
+  let sortedList = useMemo(() => {
+    let list = [...items];
+    if (sort === "description") {
+      // ascending alphabetical
+      list.sort((a, b) => a.text.localeCompare(b.text));
+    } else if (sort === "input-order") {
+      // descending by id (newest first)
+      list.sort((a, b) => b.id - a.id);
+    } else if (sort === "packed-status") {
+      // ascending: unchecked first, checked last
+      list.sort((a, b) => Number(a.checked) - Number(b.checked));
+    }
+    return [...items];
+  }, [items, sort]);
 
   function handleAddItem(item) {
     setItems([...items, { ...item, id: new Date().getTime() }]);
